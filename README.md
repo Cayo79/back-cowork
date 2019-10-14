@@ -9,3 +9,6 @@ Run `npm start` for a dev server. Navigate to API `http://localhost:8081/`. The 
 ## Install
 
 Run `npm install` to build the project.
+
+## Base de Datos MySql
+Config DB in ./config/env.js

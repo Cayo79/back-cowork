@@ -16,4 +16,7 @@ module.exports = function(app) {
  
     // Delete a Assigned with Id
     app.delete('/api/assignedhall/:id', assigneds.delete);
+
+    // Validar a Assigned with Id
+    app.post('/api/assignedhall/validar', assigneds.validar);
 }
