@@ -10,7 +10,8 @@ exports.create = (req, res) => {
 	Assigned.create({
 		idSala: req.body.idSala,
 		beginDate: req.body.beginDate,
-		endDate: req.body.endDate
+		endDate: req.body.endDate,
+		title: req.body.title
 	}).then(salida => {
 		// Send created assigned hall to client
 		res.send(salida);
@@ -20,6 +21,7 @@ exports.create = (req, res) => {
 exports.validar = (req, res) => {
 	Assigned.findAll({
 		where: {
+			id: { [Op.ne]: req.body.id },
 			idSala: req.body.idSala,
 			[Op.or]: [
 				{
@@ -30,7 +32,7 @@ exports.validar = (req, res) => {
 					endDate: { [Op.gte]: req.body.endDate },
 				}, {
 					beginDate: { [Op.gt]: req.body.beginDate },
-					endDate: { [Op.lt]: req.body.endDate },
+					endDate: { [Op.lte]: req.body.endDate },
 				}
 			]
 		}
@@ -60,7 +62,7 @@ exports.findById = (req, res) => {
 // Update a Assigned Hall
 exports.update = (req, res) => {
 	const id = req.params.id;
-	Assigned.update({ idSala: req.body.idSala, beginDate: req.body.beginDate, endDate: req.body.endDate },
+	Assigned.update({ idSala: req.body.idSala, beginDate: req.body.beginDate, endDate: req.body.endDate, title: req.body.title },
 		{ where: { id: req.params.id } }
 	).then(() => {
 		res.status(200).send("updated successfully a assigned hall with id = " + id);
